@@ -1,0 +1,19 @@
+﻿<Window
+    x:Class="INotifyPropertyChangedImplementations.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:INotifyPropertyChangedImplementations"
+    Width="325"
+    Height="150">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <!--  ReactiveProperty以外  -->
+        <TextBox Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding Person.FullName}" />
+        <!--  ReactiveProperty専用  -->
+        <!--<TextBox Text="{Binding Person.Name.Value, UpdateSourceTrigger=PropertyChanged}" />-->
+        <!--<TextBlock Text="{Binding Person.FullName.Value}" />-->
+    </StackPanel>
+</Window>
