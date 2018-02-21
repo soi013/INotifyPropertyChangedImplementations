@@ -16,7 +16,7 @@ namespace INotifyPropertyChangedImplementations
     class MainWindowViewModel
     {
         public object Person { get; set; }
-        = new PersonNN();  //通知なし
+        //= new PersonNN();  //通知なし
         //= new Person3();  //C#3版
         //= new Person5();    //C#5版
         //= new Person6();  //C#6版
@@ -24,7 +24,7 @@ namespace INotifyPropertyChangedImplementations
         //= new PersonVM(); //独自ViewModel継承版
         //= new PersonNB(); //独自ViewModel継承バッキングフィールド無し版
         //= new PersonVM(); //独自ViewModel継承版
-        //= new PersonEx(); //拡張メソッド使用版
+        = new PersonEx(); //拡張メソッド使用版
         //= new PersonMV(); //MVVMライブラリ使用版
         //= new PersonRP(); //ReactiveProperty版
         //= new FodyPerson.PersonFD(); //Fody使用版
@@ -331,10 +331,11 @@ public class PersonX : INotifyPropertyChanged
         /// </summary>
         /// <typeparam name="TResult">プロパティの型</typeparam>
         /// <param name="_this">イベントハンドラ</param>
+        /// <param name="propertyName">プロパティ名を表すExpression。() => Nameのように指定する。</param>
         /// <param name="source">元の値</param>
         /// <param name="value">新しい値</param>
         /// <returns>値の変更有無</returns>
-        public static bool RaiseIfSet<TResult>(this PropertyChangedEventHandler _this, ref TResult source, TResult value)
+        public static bool RaiseIfSet<TResult>(this PropertyChangedEventHandler _this, Expression<Func<TResult>> propertyName, ref TResult source, TResult value)
         {
             //値が同じだったら何もしない
             if (object.Equals(source, value))
@@ -342,7 +343,7 @@ public class PersonX : INotifyPropertyChanged
 
             source = value;
             //イベント発行
-            _this.Raise(() => value);
+            Raise(_this, propertyName);
             return true;
         }
     }
@@ -357,7 +358,7 @@ public class PersonX : INotifyPropertyChanged
             get => _Name;
             set
             {
-                if (PropertyChanged.RaiseIfSet(ref _Name, value))
+                if (PropertyChanged.RaiseIfSet(() => Name, ref _Name, value))
                     PropertyChanged.Raise(() => FullName);
             }
         }
