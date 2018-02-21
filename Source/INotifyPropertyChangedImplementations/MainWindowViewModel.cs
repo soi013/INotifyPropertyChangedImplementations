@@ -10,25 +10,33 @@ using Reactive.Bindings.Extensions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using PropertyChanged;
 
 namespace INotifyPropertyChangedImplementations
 {
     class MainWindowViewModel
     {
         public object Person { get; set; }
-                                                    //= new Person3();  //C#3版
-                                                    //= new Person5();    //C#5版
-                                                    //= new Person6();  //C#6版
-                                                    //= new Person7();  //C#7版
-                                                    //= new PersonVM(); //独自ViewModel継承版
-                                                    //= new PersonNB(); //独自ViewModel継承バッキングフィールド無し版
-                                                    //= new PersonVM(); //独自ViewModel継承版
-                                                    //= new PersonEx(); //拡張メソッド使用版
-                                                    //= new PersonMV(); //MVVMライブラリ使用版
-                                                    //= new PersonRP(); //ReactiveProperty版
-                                                    = new PersonFD(); //Fody使用版
+        = new PersonNN();  //通知なし
+        //= new Person3();  //C#3版
+        //= new Person5();    //C#5版
+        //= new Person6();  //C#6版
+        //= new Person7();  //C#7版
+        //= new PersonVM(); //独自ViewModel継承版
+        //= new PersonNB(); //独自ViewModel継承バッキングフィールド無し版
+        //= new PersonVM(); //独自ViewModel継承版
+        //= new PersonEx(); //拡張メソッド使用版
+        //= new PersonMV(); //MVVMライブラリ使用版
+        //= new PersonRP(); //ReactiveProperty版
+        //= new FodyPerson.PersonFD(); //Fody使用版
     }
+    #region 通知なし
+    public class PersonNN
+    {
+        public string Name { get; set; } = "Hejlsberg";
+
+        public string FullName => $"Anders {Name}";
+    }
+    #endregion
 
     #region C#3版
     public class Person3 : INotifyPropertyChanged
@@ -390,55 +398,5 @@ public class PersonX : INotifyPropertyChanged
                 .ToReadOnlyReactiveProperty();
         }
     }
-    #endregion
-
-    #region Fody版
-    [AddINotifyPropertyChangedInterface]
-    public class PersonFD
-    {
-        public string Name { get; set; } = "Hejlsberg";
-
-        public string FullName => $"Anders {Name}";
-    }
-
-    //ILからC#に再変換したもの
-    //public class PersonFD_ILSpy : INotifyPropertyChanged
-    //{
-    //    [field: NonSerialized]
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //    public virtual void OnPropertyChanged(string propertyName)
-    //    {
-    //        PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-    //        if (propertyChanged != null)
-    //        {
-    //            propertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    //        }
-    //    }
-
-    //public string Name
-    //{
-    //    [CompilerGenerated]
-    //    get { return this.< Name > k__BackingField; }
-    //    [CompilerGenerated]
-    //    set
-    //    {
-    //        if (string.Equals(this.< Name > k__BackingField, value, StringComparison.Ordinal))
-    //        {
-    //            return;
-    //        }
-    //        this.< Name > k__BackingField = value;
-    //        this.OnPropertyChanged("FullName");
-    //        this.OnPropertyChanged("Name");
-    //    }
-    //}
-
-    //public string FullName { get { return string.Format("Anders {0}", this.Name); } }
-
-    //public PersonFD()
-    //{
-    //    this.< Name > k__BackingField = "Hejlsberg";
-    //    base..ctor();
-    //}
-    //}
     #endregion
 }
