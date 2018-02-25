@@ -200,7 +200,7 @@ public class PersonX : INotifyPropertyChanged
         protected bool RaisePropertyChangedIfSet<TResult>(ref TResult source, TResult value, [CallerMemberName]string propertyName = null)
         {
             //値が同じだったら何もしない
-            if (object.Equals(source, value))
+            if (EqualityComparer<TResult>.Default.Equals(source, value))
                 return false;
 
             source = value;
@@ -262,7 +262,7 @@ public class PersonX : INotifyPropertyChanged
         protected bool RaisePropertyChangedIfSet<TResult>(TResult value, [CallerMemberName]string propertyName = null)
         {
             //値が同じだったら何もしない
-            if (object.Equals(GetPropertyValue<TResult>(propertyName), value))
+            if (EqualityComparer<TResult>.Default.Equals(GetPropertyValue<TResult>(propertyName), value))
                 return false;
 
             //プロパティの現在値に入力
@@ -338,7 +338,7 @@ public class PersonX : INotifyPropertyChanged
         public static bool RaiseIfSet<TResult>(this PropertyChangedEventHandler _this, Expression<Func<TResult>> propertyName, ref TResult source, TResult value)
         {
             //値が同じだったら何もしない
-            if (object.Equals(source, value))
+            if (EqualityComparer<TResult>.Default.Equals(source, value))
                 return false;
 
             source = value;
