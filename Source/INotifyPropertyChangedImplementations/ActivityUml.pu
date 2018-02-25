@@ -1,0 +1,42 @@
+﻿@startuml
+
+title どうするINotifyPropertyChanged実装
+
+
+start
+
+if (ライブラリ導入する?) then (yes)
+  if (短さのためには手段を選ばない?) then (yes)
+    :Fody;
+    stop
+  else (no)
+    if (継承する?) then (yes)
+          :MVVMライブラリ継承版;
+          stop
+    else (no)
+      :ReactiveProperty;
+      stop
+    endif
+  endif
+else (no)
+  if (継承する?) then (yes)
+          if (バッキングフィールドを消したい?) then (yes)
+            :独自VM継承;
+            stop
+        else (no)
+            :独自VM継承BF無し版;
+            stop
+        endif
+  else (no)
+    if (拡張メソッド使用する?) then (yes)
+      :拡張メソッド使用版;
+      stop
+    else (no)
+      :個別クラスで実装(C#3~7);
+      stop
+    endif
+  endif
+endif
+
+
+@enduml
