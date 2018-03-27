@@ -21,10 +21,10 @@ if (ライブラリ導入する?) then (yes)
 else (no)
   if (継承する?) then (yes)
           if (バッキングフィールドを消したい?) then (yes)
-            :独自VM継承;
+            :独自VM継承BF無し版;
             stop
         else (no)
-            :独自VM継承BF無し版;
+            :独自VM継承;
             stop
         endif
   else (no)
