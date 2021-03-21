@@ -20,11 +20,11 @@ namespace INotifyPropertyChangedImplementations
         //= new Person3();  //C#3版
         //= new Person5();    //C#5版
         //= new Person6();  //C#6版
-        //= new Person7();  //C#7版
+        = new Person7();  //C#7版
         //= new PersonVM(); //独自ViewModel継承版
         //= new PersonNB(); //独自ViewModel継承バッキングフィールド無し版
         //= new PersonVM(); //独自ViewModel継承版
-        = new PersonEx(); //拡張メソッド使用版
+        //= new PersonEx(); //拡張メソッド使用版
         //= new PersonMV(); //MVVMライブラリ使用版
         //= new PersonRP(); //ReactiveProperty版
         //= new FodyPerson.PersonFD(); //Fody使用版
