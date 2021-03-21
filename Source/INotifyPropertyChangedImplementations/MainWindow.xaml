@@ -10,12 +10,12 @@
     </Window.DataContext>
     <StackPanel>
         <!--  ReactiveProperty以外  -->
-        <TextBox Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}" />
+        <!--<TextBox Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}" />-->
         <TextBlock Text="== ↓Change ==" />
-        <TextBlock Text="{Binding Person.Name}" />
-        <TextBlock Text="{Binding Person.FullName}" />
+        <!--<TextBlock Text="{Binding Person.Name}" />
+        <TextBlock Text="{Binding Person.FullName}" />-->
         <!--  ReactiveProperty専用  -->
-        <!--<TextBox Text="{Binding Person.Name.Value, UpdateSourceTrigger=PropertyChanged}" />-->
-        <!--<TextBlock Text="{Binding Person.FullName.Value}" />-->
+        <TextBox Text="{Binding Person.Name.Value, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding Person.FullName.Value}" />
     </StackPanel>
 </Window>
